@@ -1,0 +1,138 @@
+{
+    "target": "http://testphp.vulnweb.com",
+    "target_ip": "44.228.249.3",
+    "technologies": {
+        "Server": "nginx/1.19.0",
+        "X-Powered-By": "PHP/5.6.40-38+ubuntu20.04.1+deb.sury.org+1"
+    },
+    "security_headers": {
+        "Strict-Transport-Security": {
+            "status": "Missing",
+            "value": null
+        },
+        "Content-Security-Policy": {
+            "status": "Missing",
+            "value": null
+        },
+        "X-Content-Type-Options": {
+            "status": "Missing",
+            "value": null
+        },
+        "X-Frame-Options": {
+            "status": "Missing",
+            "value": null
+        },
+        "Referrer-Policy": {
+            "status": "Missing",
+            "value": null
+        },
+        "Permissions-Policy": {
+            "status": "Missing",
+            "value": null
+        }
+    },
+    "open_ports": [
+        80
+    ],
+    "services": {
+        "80": {
+            "service": "HTTP",
+            "version": "Unknown"
+        }
+    },
+    "vulnerabilities": [
+        {
+            "type": "Missing Security Header",
+            "severity": "CRITICAL",
+            "description": "The 'Strict-Transport-Security' header is missing.",
+            "url": "http://testphp.vulnweb.com",
+            "timestamp": "2025-11-09 22:57:39"
+        },
+        {
+            "type": "Missing Security Header",
+            "severity": "HIGH",
+            "description": "The 'Content-Security-Policy' header is missing.",
+            "url": "http://testphp.vulnweb.com",
+            "timestamp": "2025-11-09 22:57:39"
+        },
+        {
+            "type": "Missing Security Header",
+            "severity": "MEDIUM",
+            "description": "The 'X-Content-Type-Options' header is missing.",
+            "url": "http://testphp.vulnweb.com",
+            "timestamp": "2025-11-09 22:57:39"
+        },
+        {
+            "type": "Missing Security Header",
+            "severity": "MEDIUM",
+            "description": "The 'X-Frame-Options' header is missing.",
+            "url": "http://testphp.vulnweb.com",
+            "timestamp": "2025-11-09 22:57:39"
+        },
+        {
+            "type": "Missing Security Header",
+            "severity": "LOW",
+            "description": "The 'Referrer-Policy' header is missing.",
+            "url": "http://testphp.vulnweb.com",
+            "timestamp": "2025-11-09 22:57:39"
+        },
+        {
+            "type": "Missing Security Header",
+            "severity": "LOW",
+            "description": "The 'Permissions-Policy' header is missing.",
+            "url": "http://testphp.vulnweb.com",
+            "timestamp": "2025-11-09 22:57:39"
+        },
+        {
+            "type": "Directory Listing/Exposure",
+            "severity": "LOW",
+            "description": "Found directory: admin",
+            "url": "http://testphp.vulnweb.com/admin/",
+            "timestamp": "2025-11-09 22:57:43"
+        },
+        {
+            "type": "Directory Listing/Exposure",
+            "severity": "LOW",
+            "description": "Found directory: vendor",
+            "url": "http://testphp.vulnweb.com/vendor/",
+            "timestamp": "2025-11-09 22:57:43"
+        },
+        {
+            "type": "Admin Panel Exposed",
+            "severity": "MEDIUM",
+            "description": "/admin",
+            "url": "http://testphp.vulnweb.com/admin",
+            "timestamp": "2025-11-09 22:57:56"
+        },
+        {
+            "type": "Admin Panel Exposed",
+            "severity": "MEDIUM",
+            "description": "/admin/",
+            "url": "http://testphp.vulnweb.com/admin/",
+            "timestamp": "2025-11-09 22:57:56"
+        },
+        {
+            "type": "Admin Panel Exposed",
+            "severity": "MEDIUM",
+            "description": "/login.php",
+            "url": "http://testphp.vulnweb.com/login.php",
+            "timestamp": "2025-11-09 22:57:57"
+        },
+        {
+            "type": "SQL Injection",
+            "severity": "CRITICAL",
+            "description": "Parameter: cat",
+            "url": "http://testphp.vulnweb.com/listproducts.php?cat=%27",
+            "timestamp": "2025-11-09 22:58:02"
+        },
+        {
+            "type": "XSS (Reflected/Stored)",
+            "severity": "HIGH",
+            "description": "Parameter: cat, Payload: <h1>XSS_TEST_MARKER</h1>",
+            "url": "http://testphp.vulnweb.com/listproducts.php?cat=%3Ch1%3EXSS_TEST_MARKER%3C%2Fh1%3E",
+            "timestamp": "2025-11-09 22:59:29"
+        }
+    ],
+    "exploits": [],
+    "timestamp": "2025-11-09 22:59:30"
+}

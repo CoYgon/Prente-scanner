@@ -1,0 +1,42 @@
+[
+  {
+    "komutAdi": "Hızlı Servis Tespiti",
+    "parametre": "-sV --version-intensity 0 -F",
+    "aciklama": "En popüler 100 portta hızlı SYN taraması ve servis sürümü tespiti yapar.",
+    "kullanimAmaci": "Port Tarama",
+    "ornekKullanim": "nmap [IP] -sV --version-intensity 0 -F",
+    "riskSeviyesi": "Orta"
+  },
+  {
+    "komutAdi": "Agresif Tarama",
+    "parametre": "-A -T4",
+    "aciklama": "OS tespiti, servis sürümü tespiti, varsayılan script taramaları (vuln dahil değil) ve Traceroute yapar.",
+    "kullanimAmaci": "OS/Servis Tespiti",
+    "ornekKullanim": "nmap [IP] -A -T4",
+    "riskSeviyesi": "Yüksek"
+  },
+  {
+    "komutAdi": "Güvenlik Açığı Taraması",
+    "parametre": "-sV --script vuln",
+    "aciklama": "Açık portlarda bilinen zafiyetleri arayan Nmap Script Engine (NSE) scriptlerini çalıştırır.",
+    "kullanimAmaci": "Script Taraması",
+    "ornekKullanim": "nmap [IP] -sV --script vuln",
+    "riskSeviyesi": "Yüksek"
+  },
+  {
+    "komutAdi": "SYN Gizli Tarama",
+    "parametre": "-sS -Pn",
+    "aciklama": "Tam bağlantı kurmadan portları tarar (Firewall atlatma ihtimali) ve ping atmayı devre dışı bırakır.",
+    "kullanimAmaci": "Port Tarama",
+    "ornekKullanim": "nmap [IP] -sS -Pn",
+    "riskSeviyesi": "Orta"
+  },
+  {
+    "komutAdi": "Tüm TCP Portlarını Tarama",
+    "parametre": "-p- -T3",
+    "aciklama": "65535 portun tamamını tarar. Zaman alıcıdır.",
+    "kullanimAmaci": "Port Tarama",
+    "ornekKullanim": "nmap [IP] -p- -T3",
+    "riskSeviyesi": "Orta"
+  }
+]

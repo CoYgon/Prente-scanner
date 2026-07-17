@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRENTE SCANNER - Professional Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 252, 248, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(210, 180, 140, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #d4a574 0%, #c9966e 100%);
+            color: #4a3828;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(74, 56, 40, 0.1);
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.85;
+            color: #5a4434;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 0;
+            min-height: 700px;
+        }
+
+        .sidebar {
+            background: #faf7f2;
+            padding: 30px;
+            border-right: 1px solid #e8dfd5;
+        }
+
+        .control-group {
+            background: #fffcf9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(210, 180, 140, 0.08);
+            border: 1px solid #f0e8dc;
+        }
+
+        .control-group h3 {
+            color: #c9966e;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #6b5d52;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e8dfd5;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: #fffcf9;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #d4a574;
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+
+        .radio-group {
+            margin: 10px 0;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .radio-option:hover {
+            background: #faf7f2;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #d4a574;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #d4a574;
+        }
+
+        .progress-section {
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #f0e8dc;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d4a574 0%, #c9966e 100%);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a3828;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            text-align: center;
+            color: #8b7355;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .btn-stop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .content-area {
+            padding: 30px;
+            background: #fffcf9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid #e8dfd5;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #8b7355;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            color: #d4a574;
+            background: #faf7f2;
+        }
+
+        .tab.active {
+            color: #d4a574;
+            border-bottom-color: #d4a574;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .console {
+            background: #2d2520;
+            color: #e8dfd5;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            height: 500px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+        }
+
+        .log-info { border-left-color: #9eb8d9; color: #b8cfe8; }
+        .log-success { border-left-color: #a8c686; color: #c4dda1; }
+        .log-warning { border-left-color: #e8b86d; color: #f0cb8e; }
+        .log-error { border-left-color: #d49a8a; color: #e8b5a7; }
+        .log-exploit { border-left-color: #d49a8a; color: #e8b5a7; font-weight: bold; }
+        .log-scan { border-left-color: #8ab4d4; color: #a7cfe8; }
+        .log-vuln { border-left-color: #c9a6d4; color: #dfc0e8; }
+
+        .timestamp {
+            color: #9b8d7d;
+            margin-right: 10px;
+        }
+
+        .level {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffcf9;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #d4a574 0%, #c9966e 100%);
+            color: #4a3828;
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e8dfd5;
+            color: #5a4434;
+        }
+
+        table tr:hover {
+            background: #faf7f2;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-critical { background: #f5d5d0; color: #a85842; }
+        .badge-high { background: #ead9f0; color: #8f6ba0; }
+        .badge-medium { background: #f5ecd0; color: #b8934a; }
+        .badge-low { background: #d0e5f5; color: #5a8ab8; }
+        .badge-open { background: #dff0d8; color: #5a8f5a; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #d4a574 0%, #c9966e 100%);
+            color: #4a3828;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.2);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .report-section {
+            background: #fffcf9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d4a574;
+        }
+
+        .report-section h3 {
+            color: #c9966e;
+            margin-bottom: 15px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #faf7f2;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4a574;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c9966e;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #9b8d7d;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 PRENTE SCANNER</h1>
+            <p>Professional Penetration Testing & Exploitation Framework v5.0</p>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="control-group">
+                    <h3>🎯 Target Configuration</h3>
+                    <div class="input-group">
+                        <label>Target URL</label>
+                        <input type="text" id="targetUrl" placeholder="http://testphp.vulnweb.com">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>⚙️ Scan Mode</h3>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="scanMode" value="1">
+                            <span>🔍 Quick Scan (Web Only)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="scanMode" value="2">
+                            <span>⚡ Normal Scan (Web + Ports)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="scanMode" value="3" checked>
+                            <span>🚀 Full Penetration Test</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>🔧 Options</h3>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="verboseMode">
+                        <span>Verbose Output</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="autoExploit" checked>
+                        <span>Auto Exploitation</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="autoSave">
+                        <span>Auto Save Report</span>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <h3>📊 Progress</h3>
+                    <div class="progress-section">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill">0%</div>
+                        </div>
+                        <div class="progress-text" id="progressText">Ready to scan</div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn btn-start" id="startBtn">
+                        <span>🚀</span>
+                        <span>START SCAN</span>
+                    </button>
+                    <button class="btn btn-stop" id="stopBtn" disabled>
+                        <span>⛔</span>
+                        <span>STOP SCAN</span>
+                    </button>
+                    <button class="btn btn-export" id="exportBtn" disabled>
+                        <span>💾</span>
+                        <span>EXPORT REPORT</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <div class="tabs">
+                    <button class="tab active" data-tab="console">📟 Console</button>
+                    <button class="tab" data-tab="ports">🔌 Open Ports</button>
+                    <button class="tab" data-tab="vulnerabilities">🔥 Vulnerabilities</button>
+                    <button class="tab" data-tab="exploits">💥 Exploits</button>
+                    <button class="tab" data-tab="report">📊 Report</button>
+                </div>
+
+                <div class="tab-content active" id="console-tab">
+                    <div class="console" id="consoleOutput">
+                        <div class="log-entry log-info">
+                            <span class="timestamp">[--:--:--]</span>
+                            <span class="level">[INFO]</span>
+                            <span>System ready. Enter target URL and click START SCAN.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="ports-tab">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔌</div>
+                        <p>No port scan results yet. Start a scan to see open ports.</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="vulnerabilities-tab">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔥</div>
+                        <p>No vulnerabilities detected yet. Start a scan to find security issues.</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="exploits-tab">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💥</div>
+                        <p>No successful exploits yet. Start a scan to attempt exploitation.</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="report-tab">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <p>No report available. Complete a scan to generate a report.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL
+        const API_URL = 'http://127.0.0.1:5000/api';
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tabName + '-tab').classList.add('active');
+            });
+        });
+
+        function logToConsole(message, level = 'INFO') {
+            const console = document.getElementById('consoleOutput');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${level.toLowerCase()}`;
+            logEntry.innerHTML = `
+                <span class="timestamp">[${timestamp}]</span>
+                <span class="level">[${level}]</span>
+                <span>${message}</span>
+            `;
+            console.appendChild(logEntry);
+            console.scrollTop = console.scrollHeight;
+        }
+
+        function updateProgress(percent, text) {
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            progressFill.style.width = percent + '%';
+            progressFill.textContent = percent + '%';
+            progressText.textContent = text;
+        }
+
+        function populatePortsTable(ports, services) {
+            const portsTab = document.getElementById('ports-tab');
+            
+            if (ports.length === 0) {
+                portsTab.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔌</div>
+                        <p>No open ports found.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const table = document.createElement('table');
+            let rows = '';
+            
+            ports.sort((a, b) => a - b).forEach(port => {
+                const service = services[port] || {};
+                rows += `
+                    <tr>
+                        <td><strong>${port}</strong></td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>${service.service || 'unknown'}</td>
+                        <td>${service.version || 'unknown'}</td>
+                    </tr>
+                `;
+            });
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Port</th>
+                        <th>State</th>
+                        <th>Service</th>
+                        <th>Version</th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            `;
+            portsTab.innerHTML = '';
+            portsTab.appendChild(table);
+        }
+
+        function populateVulnerabilitiesTable(vulnerabilities) {
+            const vulnsTab = document.getElementById('vulnerabilities-tab');
+            
+            if (vulnerabilities.length === 0) {
+                vulnsTab.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔥</div>
+                        <p>No vulnerabilities detected.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const table = document.createElement('table');
+            let rows = '';
+            
+            vulnerabilities.forEach(v => {
+                rows += `
+                    <tr>
+                        <td><strong>${v.type}</strong></td>
+                        <td><span class="badge badge-${v.severity.toLowerCase()}">${v.severity}</span></td>
+                        <td>${v.description}</td>
+                        <td style="font-size: 12px; color: #666;">${v.url.substring(0, 50)}...</td>
+                    </tr>
+                `;
+            });
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Severity</th>
+                        <th>Description</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            `;
+            vulnsTab.innerHTML = '';
+            vulnsTab.appendChild(table);
+        }
+
+        function populateExploitsTable(exploits) {
+            const exploitsTab = document.getElementById('exploits-tab');
+            
+            if (exploits.length === 0) {
+                exploitsTab.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💥</div>
+                        <p>No successful exploits.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const table = document.createElement('table');
+            let rows = '';
+            
+            exploits.forEach(e => {
+                rows += `
+                    <tr>
+                        <td><strong>${e.type}</strong></td>
+                        <td><span class="badge badge-critical">${e.method}</span></td>
+                        <td><code>${e.payload.substring(0, 50)}</code></td>
+                        <td>${e.result.substring(0, 50)}...</td>
+                    </tr>
+                `;
+            });
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Method</th>
+                        <th>Payload</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            `;
+            exploitsTab.innerHTML = '';
+            exploitsTab.appendChild(table);
+        }
+
+        function generateReport(results) {
+            const reportTab = document.getElementById('report-tab');
+            const html = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Open Ports</div>
+                        <div class="stat-value">${results.open_ports.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Vulnerabilities</div>
+                        <div class="stat-value">${results.vulnerabilities.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Successful Exploits</div>
+                        <div class="stat-value">${results.exploits.length}</div>
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <h3>🎯 Target Information</h3>
+                    <p><strong>URL:</strong> ${results.target_url}</p>
+                    <p><strong>IP Address:</strong> ${results.target_ip}</p>
+                    <p><strong>Scan Date:</strong> ${results.timestamp}</p>
+                </div>
+
+                <div class="report-section">
+                    <h3>🔥 Critical Findings</h3>
+                    ${results.vulnerabilities.filter(v => v.severity === 'CRITICAL').map(v => `
+                        <p>• <strong>${v.type}</strong> - ${v.description}</p>
+                    `).join('') || '<p>No critical vulnerabilities found.</p>'}
+                </div>
+
+                <div class="report-section">
+                    <h3>💥 Successful Exploitations</h3>
+                    ${results.exploits.map(e => `
+                        <p>• <strong>${e.type}</strong> - ${e.method}: ${e.result.substring(0, 100)}</p>
+                    `).join('') || '<p>No successful exploits.</p>'}
+                </div>
+            `;
+            reportTab.innerHTML = html;
+        }
+
+        // Poll for scan status and logs
+        let pollInterval = null;
+
+        function startPolling() {
+            pollInterval = setInterval(async () => {
+                try {
+                    // Get status
+                    const statusRes = await fetch(`${API_URL}/scan-status`);
+                    const statusData = await statusRes.json();
+                    updateProgress(statusData.progress, statusData.status);
+
+                    // Get logs
+                    const logsRes = await fetch(`${API_URL}/scan-logs`);
+                    const logsData = await logsRes.json();
+                    
+                    // Update console with new logs
+                    const console = document.getElementById('consoleOutput');
+                    const currentLogCount = console.children.length;
+                    
+                    if (logsData.logs.length > currentLogCount) {
+                        for (let i = currentLogCount; i < logsData.logs.length; i++) {
+                            const log = logsData.logs[i];
+                            const logEntry = document.createElement('div');
+                            logEntry.className = `log-entry log-${log.level.toLowerCase()}`;
+                            logEntry.innerHTML = `
+                                <span class="timestamp">[${log.timestamp}]</span>
+                                <span class="level">[${log.level}]</span>
+                                <span>${log.message}</span>
+                            `;
+                            console.appendChild(logEntry);
+                        }
+                        console.scrollTop = console.scrollHeight;
+                    }
+
+                    // If scan completed, get results
+                    if (statusData.status === 'completed') {
+                        stopPolling();
+                        await loadScanResults();
+                        document.getElementById('startBtn').disabled = false;
+                        document.getElementById('stopBtn').disabled = true;
+                        document.getElementById('exportBtn').disabled = false;
+                    }
+
+                } catch (error) {
+                    console.error('Polling error:', error);
+                }
+            }, 1000);
+        }
+
+        function stopPolling() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        }
+
+        async function loadScanResults() {
+            try {
+                const res = await fetch(`${API_URL}/scan-results`);
+                const data = await res.json();
+                
+                if (data.success) {
+                    const results = data.results;
+                    populatePortsTable(results.open_ports, results.services);
+                    populateVulnerabilitiesTable(results.vulnerabilities);
+                    populateExploitsTable(results.exploits);
+                    generateReport(results);
+                    
+                    alert(`Scan Complete!\n\nOpen Ports: ${results.open_ports.length}\nVulnerabilities: ${results.vulnerabilities.length}\nSuccessful Exploits: ${results.exploits.length}`);
+                }
+            } catch (error) {
+                console.error('Error loading results:', error);
+            }
+        }
+
+        // Start scan
+        document.getElementById('startBtn').addEventListener('click', async () => {
+            const targetUrl = document.getElementById('targetUrl').value.trim();
+            
+            if (!targetUrl) {
+                alert('Please enter a target URL!');
+                return;
+            }
+
+            if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
+                alert('URL must start with http:// or https://');
+                return;
+            }
+
+            const mode = document.querySelector('input[name="scanMode"]:checked').value;
+            const verbose = document.getElementById('verboseMode').checked;
+
+            // Clear previous results
+            document.getElementById('consoleOutput').innerHTML = '';
+            
+            // Update UI
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('stopBtn').disabled = false;
+            document.getElementById('exportBtn').disabled = true;
+
+            try {
+                const response = await fetch(`${API_URL}/start-scan`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        target_url: targetUrl,
+                        mode: parseInt(mode),
+                        verbose: verbose
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    logToConsole('Scan started successfully', 'SUCCESS');
+                    startPolling();
+                } else {
+                    alert('Error: ' + data.error);
+                    document.getElementById('startBtn').disabled = false;
+                    document.getElementById('stopBtn').disabled = true;
+                }
+            } catch (error) {
+                alert('Connection error: ' + error.message);
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+            }
+        });
+
+        // Stop scan
+        document.getElementById('stopBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${API_URL}/stop-scan`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    stopPolling();
+                    logToConsole('Scan stopped by user', 'WARNING');
+                    updateProgress(0, 'Scan stopped');
+                    document.getElementById('startBtn').disabled = false;
+                    document.getElementById('stopBtn').disabled = true;
+                }
+            } catch (error) {
+                console.error('Error stopping scan:', error);
+            }
+        });
+
+        // Export report
+        document.getElementById('exportBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${API_URL}/export-report`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const blob = new Blob([JSON.stringify(data.report, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `prente_report_${Date.now()}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    
+                    logToConsole('Report exported successfully', 'SUCCESS');
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Export error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
